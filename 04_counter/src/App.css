@@ -1,0 +1,16 @@
+.container {
+  margin: 100px;
+}
+.div {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+h1,h2{
+  color: crimson;
+}
+
+button{
+  color: greenyellow;
+}
