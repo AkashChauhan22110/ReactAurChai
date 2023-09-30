@@ -48,27 +48,26 @@ Contributions are always welcomed. Feel free to raise issues or send in pull req
 
 Don't forget to subscribe to ["chai aur code"](https://www.youtube.com/channel/UCNQ6FEtztATuaVhZKCY28Yw) on YouTube for the entire video series and much more!
 
-
 // import React from 'react'
 
 import { useState } from "react";
 
 const App = () => {
-  const [value, setValue] = useState("");
+  const [task, setTask] = useState("");
   const [todo, setTodo] = useState([]);
   const [counter, setCounter] = useState(18);
 
-  const handleClick = () => {
-    if (value !== "" && todo !== "") {
-      setTodo([...todo, value]);
-      setValue("");
+  const addTask = () => {
+    if (todo !== "" && task !== "") {
+      setTodo([...todo, task]);
+      setTask("");
     }
   };
 
-  const handleDeleteTask = (i) => {
-    const updatedTasks = [...todo];
-    updatedTasks.splice(i, 1);
-    setTodo(updatedTasks);
+  const deleteTask = (i) => {
+    const updateTask = [...todo];
+    updateTask.splice(i, 1);
+    setTodo(updateTask);
   };
 
   const addValue = () => {
@@ -80,35 +79,43 @@ const App = () => {
   };
 
   return (
-    <div className="container">
-      <div className="app">
-        <input
-          value={value}
-          onChange={(e) => {
-            setValue(e.target.value);
-          }}
-          type="text"
-          placeholder="Add Your Task Here.."
-        />
-        <button onClick={handleClick}>Add ToDo</button>
-      </div>
-
+    <>
       <div>
-        <ul>
-          {todo.map((todos, i) => (
-            <li key={i}>
-              {todos}
-              <button onClick={() => handleDeleteTask(i)}>Delete</button>
-            </li>
-          ))}
-        </ul>
+        <div>
+          <input
+            value={task}
+            onChange={(e) => {
+              setTask(e.target.value);
+            }}
+            type="text"
+            placeholder="Add Your Task Here..!"
+          />
+          <button onClick={addTask}>Add Task</button>
+        </div>
+        <hr />
+        <div>
+          <ul>
+            {todo.map((todos, i) => (
+              <li key={i}>
+                {todos}
+                <button
+                  onClick={() => {
+                    deleteTask(i);
+                  }}
+                >
+                  Delete
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
       <div>
         <h1>Couter Live Value :{counter}</h1>
         <button onClick={addValue}>Add</button>
         <button onClick={removeValue}>Remove</button>
       </div>
-    </div>
+    </>
   );
 };
 
